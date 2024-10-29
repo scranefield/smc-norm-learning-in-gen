@@ -138,13 +138,15 @@ The configuration defines:
     rule_dict::Dict{String,Dict{String,Vector{String}}} = Dict(
         "NORMS" => Dict("No_norm" => [], "Obl" => ["COLOUR", "ZONE"], "Pro" => ["COLOUR", "ZONE"]),
         "ZONE" => Dict("Zone" => []),
-        "COLOUR" => Dict("Colour" => [])
+        "COLOUR" => Dict("Colour" => []),
+        "NO_NORM" => Dict("No_norm" => [])
     )
     # Probability dictionaries
     p_dict::Dict{String,Dict{String,Float64}} = Dict(
-        "NORMS" => Dict("No_norm" => 0.1, "Obl" => 0.5, "Pro" => 0.4),
+        "NORMS" => Dict("No_norm" => 0.3, "Obl" => 0.4, "Pro" => 0.3),
         "ZONE" => Dict("Zone" => 1.0),
-        "COLOUR" => Dict("Colour" => 1.0)
+        "COLOUR" => Dict("Colour" => 1.0),
+        "NO_NORM" => Dict("No_norm" => 1.0)
     )
     # Probability distributions for terminal values
     q_dict::Dict{String,Dict{String,Float64}} = Dict(

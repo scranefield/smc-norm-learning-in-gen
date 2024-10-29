@@ -1,3 +1,6 @@
+include("Config.jl")
+include("Model.jl")
+
 using Parameters
 using Distributions
 using Gen
@@ -46,15 +49,15 @@ function zone_probabilities(task, norm)
     default_probs = [1 / 3, 1 / 3, 1 / 3]
 
     # Handle different norm types
-    if isa(norm, No_norm)
+    if string(typeof(norm)) == "No_norm"
         return default_probs
-    elseif isa(norm, Norm)
+    else
 
         # Route to appropriate handler based on norm type
-        if isa(norm.left, Obl)
-            return handle_obligation(norm.left, color)
-        elseif isa(norm.left, Pro)
-            return handle_prohibition(norm.left, color)
+        if string(typeof(norm)) == "Obl"
+            return handle_obligation(norm, color)
+        elseif string(typeof(norm)) == "Pro"
+            return handle_prohibition(norm, color)
         end
     end
     return default_probs
@@ -172,6 +175,7 @@ Returns:
 Filters out invalid configurations (weight = -Inf) during generation.
 """
 function generateNorm(n, constraints)
+    config = NormConfig()
     NormSet = []
     WeightSet = []
     for i in 1:n
